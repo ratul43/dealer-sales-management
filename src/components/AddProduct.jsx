@@ -50,13 +50,12 @@ export default function AddProduct({
   const [category, setCategory] = useState("Jacket");
 
   const [form, setForm] = useState({
-    name: "Puffer Jacket With Pocket Detail",
-    description:
-      "Cropped puffer jacket made of technical fabric. High neck and long sleeves. Flap pocket at the chest and in-seam side pockets at the hip. Inside pocket detail. Hem with elastic interior. Zip-up front.",
-    basePrice: "47.55",
-    stock: "77",
-    discount: "10",
-    discountType: "Chinese New Year Discount",
+    name: "",
+    description: "",
+    basePrice: "",
+    stock: "",
+    discount: "",
+    discountType: "No Discount",
   });
 
   useEffect(() => {
@@ -188,12 +187,20 @@ export default function AddProduct({
       return;
     }
 
-    if (!Number.isFinite(Number(form.basePrice)) || Number(form.basePrice) < 0) {
+    if (
+      form.basePrice === "" ||
+      !Number.isFinite(Number(form.basePrice)) ||
+      Number(form.basePrice) < 0
+    ) {
       setNotice("Enter a valid product price.");
       return;
     }
 
-    if (!Number.isInteger(Number(form.stock)) || Number(form.stock) < 0) {
+    if (
+      form.stock === "" ||
+      !Number.isInteger(Number(form.stock)) ||
+      Number(form.stock) < 0
+    ) {
       setNotice("Stock must be a non-negative whole number.");
       return;
     }
@@ -305,7 +312,7 @@ export default function AddProduct({
                   name="name"
                   value={form.name}
                   onChange={updateField}
-                  placeholder="Enter product name"
+                  placeholder="e.g. Puffer Jacket With Pocket Detail"
                   required
                   className={inputClass}
                 />
@@ -320,7 +327,7 @@ export default function AddProduct({
                   name="description"
                   value={form.description}
                   onChange={updateField}
-                  placeholder="Describe your product..."
+                  placeholder="e.g. Cropped puffer jacket made of technical fabric. High neck and long sleeves with flap pocket detail..."
                   rows={5}
                   className={`${inputClass} resize-y`}
                 />
@@ -409,6 +416,7 @@ export default function AddProduct({
                   step="0.01"
                   value={form.basePrice}
                   onChange={updateField}
+                  placeholder="e.g. 1200"
                   required
                   className={inputClass}
                 />
@@ -426,6 +434,7 @@ export default function AddProduct({
                   step="1"
                   value={form.stock}
                   onChange={updateField}
+                  placeholder="e.g. 50"
                   required
                   className={inputClass}
                 />
@@ -444,6 +453,7 @@ export default function AddProduct({
                   step="0.01"
                   value={form.discount}
                   onChange={updateField}
+                  placeholder="e.g. 10"
                   className={inputClass}
                 />
               </div>
