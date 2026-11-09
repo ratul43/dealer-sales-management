@@ -26,7 +26,7 @@ import {
 const navigation = [
   {
     name: "Dashboard",
-    href: "/dashboard/dashboard",
+    href: "/dashboard",
     icon: LayoutDashboard,
   },
   {
@@ -129,7 +129,7 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="mb-8 flex items-center justify-between px-1">
           <Link
-            href="/dashboard/dashboard"
+            href="/dashboard"
             onClick={closeMobileSidebar}
             className="text-2xl font-black tracking-tight text-gray-900"
           >
@@ -218,7 +218,16 @@ export default function Sidebar() {
                           const ChildIcon = child.icon;
 
                           const childIsActive =
-                            pathname === child.href;
+                            pathname === child.href ||
+                            (pathname.startsWith(`${child.href}/`) &&
+                              !item.children.some(
+                                (otherChild) =>
+                                  otherChild.href !== child.href &&
+                                  (pathname === otherChild.href ||
+                                    pathname.startsWith(
+                                      `${otherChild.href}/`
+                                    ))
+                              ));
 
                           return (
                             <Link
@@ -247,12 +256,16 @@ export default function Sidebar() {
             }
 
             /* Normal navigation items */
-            const active =
-              item.href === "/dashboard/dashboard"
-                ? pathname === item.href ||
-                  pathname === "/dashboard"
-                : pathname === item.href ||
-                  pathname.startsWith(`${item.href}/`);
+            const isDashboard =
+              item.href === "/dashboard" ||
+              item.href === "/dashboard/dashboard";
+
+            const active = isDashboard
+              ? pathname === "/dashboard" ||
+                pathname === "/dashboard/" ||
+                pathname === "/dashboard/dashboard"
+              : pathname === item.href ||
+                pathname.startsWith(`${item.href}/`);
 
             return (
               <Link

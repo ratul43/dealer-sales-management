@@ -1,5 +1,4 @@
 
-import Sidebar from "@/components/Sidebar";
 import {
   Bell,
   Users,
@@ -91,10 +90,7 @@ const bars = [
 export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#fafafa] text-gray-900">
-      <Sidebar />
-
-      <main className="min-w-0 md:ml-60">
-        <header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-gray-200 bg-white/95 px-5 pl-16 backdrop-blur sm:px-8 sm:pl-20 md:pl-8">
+      <header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-gray-200 bg-white/95 px-5 pl-16 backdrop-blur sm:px-8 sm:pl-20 md:pl-8">
           <div>
             <h1 className="text-lg font-semibold tracking-tight">
               Dashboard
@@ -343,7 +339,6 @@ export default function DashboardPage() {
             </div>
           </section>
         </div>
-      </main>
     </div>
   );
 }
